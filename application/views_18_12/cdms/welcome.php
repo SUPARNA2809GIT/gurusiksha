@@ -130,7 +130,7 @@ p {
     <div class="copy">
     <h1 style="font-size:60px;">GURUSIKSHA</h1>
     <p style="font-size:16px;">Premium educational service at the palm of your hands</p>
-    	<a href="#"><img src="<?php echo base_url();?>web/playstore-icon.png" style="width:200px;" class="img-rounded" /></a>
+    	<a href="https://play.google.com/store/apps/details?id=com.bolpurkhabarwala"><img src="<?php echo base_url();?>web/playstore-icon.png" style="width:200px;" class="img-rounded" /></a>
     	<a href="#"><img src="<?php echo base_url();?>web/applestore-icon.jpg" style="width:200px;" class="img-rounded" /></a>
     <p>
     	<a href="#" style="color:#FFFFFF; font-family: 'Noto Sans', sans-serif;" data-toggle="modal" data-target="#myModal"><u>Privacy Policy</u></a>

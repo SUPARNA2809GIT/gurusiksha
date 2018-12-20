@@ -964,7 +964,6 @@ class Add extends CI_Controller {
 			                                INNER JOIN tb_chapter d ON a.chapter_id=d.chapter_id ORDER BY a.assmnt_id DESC")->result();
 
 		//print_r($data['result']); die;
-		//echo $this->db->last_query(); die;
 
 		$this->form_validation->set_rules($this->validation_rules['AddQuestion']);
 		if($this->form_validation->run() == true )

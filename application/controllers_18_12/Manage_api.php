@@ -72,6 +72,9 @@ class Manage_api extends CI_Controller
 	//Save student data
 	public function saveStudent()
 	{
+
+		
+
 		$name = $this->input->post('studentName');
 		$dob = $this->input->post('studentDOB');
 		$gender = $this->input->post('studentGender');
@@ -86,10 +89,12 @@ class Manage_api extends CI_Controller
 		$preferred_day = $this->input->post('studentDay');
 		$preferred_time = $this->input->post('studentTime');
 		$language = $this->input->post('studentLanguage');
-		
+
+
 		$guardian_name = $this->input->post('studentGname');
 		$guardian_phone = $this->input->post('studentGphone');
-		
+
+
 		$students_array = array(
 			"name" => $name,
 			"dob" => $dob,
@@ -112,12 +117,6 @@ class Manage_api extends CI_Controller
 		);
 
 		$student_id = $this->common_model->addRecord('tb_students', $students_array);
-		
-		$gnId = 'GURUSIKSHAOO'.$student_id;
-		
-		$upArray = array("student_generated_id"=>$gnId);
-		
-		$this->common_model->Update_Record($upArray, "tb_students", $student_id, "student_id");
 
 
 		if ($student_id != '') {
@@ -172,21 +171,6 @@ class Manage_api extends CI_Controller
 
 				$this->common_model->addRecord('tb_students_subject', $subject_array4);
 			}
-			
-			$to=$email;
-			$subject = 'Guru Siksha';
-			$note=$name." Student Id";
-			$message = '<table align="center" width="700" style="border:outset #B1F05E;">
-					  <tr>
-						<td style="font-family:Arial, Helvetica, sans-serif; font-size:14px; text-align:left; padding:10px;"><span style="font-family:Arial, Helvetica, sans-serif; font-size:14px; color:#666666; font-weight:normal;  width:150px;">Name : '.$name.'</span></td>
-					  </tr>
-					  <tr>
-						<td style="font-family:Arial, Helvetica, sans-serif; font-size:14px; text-align:left; padding:10px;"><span style="font-family:Arial, Helvetica, sans-serif; font-size:14px; color:#666666; font-weight:normal;  width:150px;">Student Id : '.$gnId.'</span></td>
-					  </tr>
-					</table>'; 
-			
-			
-			$this->sendemail($to,$subject,$message,$note);
 
 
 			header('Access-Control-Allow-Origin: *');
@@ -653,53 +637,6 @@ public function postAssignment()
 
 				header('Access-Control-Allow-Origin: *');
 				echo json_encode(array('success' => 1, 'mobile' => $mobile, 'otp' => $otp, "utype" => $temp, "userDetails" => $userDetails, "subDetails" => $subDetails));
-
-
-
-
-			} else {
-				echo json_encode(array('success' => 0));
-			}
-		}
-
-	}
-	
-	public function studentLogin()
-	{
-
-   	/*
-   		Timeline data will be sent
-		 */
-		if ($this->input->post('studentId') != '') {
-		
-			$studentId = $this->input->post('studentId');
-
-			$numRows = $this->db->query("SELECT * FROM tb_students WHERE student_generated_id='".$studentId."'")->num_rows();
-			
-
-			if($numRows>0){
-			
-				if($numRows>0){
-				
-					$temp = 'S';
-					$userDetails = $this->db->query("SELECT * FROM tb_students WHERE student_generated_id='" . $studentId . "'")->result();
-					$subDetails = $this->db->query("SELECT a.*,b.subject FROM tb_students_subject a
-													INNER JOIN tb_subject b ON a.subject_id=b.subject_id
-													WHERE a.student_id=" . $userDetails[0]->student_id)->result();
-				}
-
-				
-
-				$otp = rand(1000, 9999);
-
-				$base_url = "http://msg.infoskysolutions.com/API/WebSMS/Http/v2.3.6/api.php?";
-				$post_fields = "username=PRAEDUOTP&api_key=20c35cf0419566416a8391352286f10d&sender=GURUSK&to=".$userDetails[0]->mobile."&message=Your OTP for login to Gurusiksha App ".$otp." . Do not share with anyone.";
-				$this->send_sms($base_url,$post_fields);
-				
-				
-				
-				header('Access-Control-Allow-Origin: *');
-				echo json_encode(array('success' => 1, 'mobile' => $userDetails[0]->mobile, 'otp' => $otp, "utype" => $temp, "userDetails" => $userDetails, "subDetails" => $subDetails));
 
 
 
@@ -1185,24 +1122,17 @@ public function studentDetails()
    //user details sent
 	public function getUserData()
 	{
-		
-		if($this->input->post('mobile') != '') {
-		
+		if ($this->input->post('mobile') != '') {
 			$mobile = $this->input->post('mobile');
 			$did = $this->input->post('deviceId');
 			$token = $this->input->post('token');
 
-			
+			$numRows = $this->db->query("SELECT * FROM tb_students WHERE mobile='" . $mobile . "'")->num_rows();
 			$numRowsG = $this->db->query("SELECT * FROM tb_guardian WHERE guardian_mobile='" . $mobile . "'")->num_rows();
 			$numRowsM = $this->db->query("SELECT * FROM tb_mentors WHERE mentor_mobile='" . $mobile . "'")->num_rows();
-			
 			$postViewSave = array();
-			
-			
-			if($this->input->post('userType') != '' && $this->input->post('userType') == 'S')
-			{
-				$numRows = $this->db->query("SELECT * FROM tb_students WHERE mobile='" . $mobile . "'")->num_rows();
-				
+
+			if ($numRows > 0 || $numRowsG > 0 || $numRowsM > 0) {
 				if ($numRows > 0) {
 					$temp = 'S';
 					$userDetails = $this->db->query("SELECT * FROM tb_students WHERE mobile='" . $mobile . "'")->result();
@@ -1225,13 +1155,7 @@ public function studentDetails()
 					}
 
 				}
-				
-				
-				header('Access-Control-Allow-Origin: *');
-				echo json_encode(array('success' => 1, 'mobile' => $mobile, "utype" => $temp, "userDetails" => $userDetails, "posts" => $posts, "followers" => $followers, "followings" => $followings, "postsDtl" =>$postViewSave, 'chatCount' => $ptype));
-			} elseif($numRowsG > 0 || $numRowsM > 0){
-			
-			
+
 				if ($numRowsG > 0) {
 					$temp = 'G';
 					$userDetails = $this->db->query("SELECT * FROM tb_guardian WHERE guardian_mobile='" . $mobile . "'")->result();
@@ -1286,7 +1210,7 @@ public function studentDetails()
 
 
 
-			}  else {
+			} else {
 				echo json_encode(array('success' => 0));
 			}
 		}
@@ -2101,7 +2025,6 @@ public function studentDetails()
 
 	private function sendemail($to,$subject,$mailBody,$note)
    {
-        
         $config = Array(
            'protocol' => 'smtp',
            'smtp_host' => 'mail.guru-siksha.com',
