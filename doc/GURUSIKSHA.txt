@@ -1,0 +1,113 @@
+Gurushiksha
+
+1) Master:- i) Language, ii) Subeject, iii) Class, iv) Teaching Time, v) Teaching Days
+
+Subject Wise, Chapter wise, Fee
+
+
+2) Tab 1: Prev Classes
+Tab 2: Current Classes 
+Tab 3: Upcoming Classes ,  
+Tab 4: Reports: Prog/Assesments
+Teb 5: Payment Details 
+
+https://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_tabs_dynamic&stacked=h
+https://bootsnipp.com/snippets/5Moza
+
+
+Students: i) List click: i) Class, ii) Sub iii) Chap iv) day, v) time, vi) is complete, vii) onclick buttton change satatus
+
+
+Today's Class: Student Details
+
+
+previous class
+upcoming class
+Payment
+
+i) Subject, Chapter , Mentor, Day , Time,  Payemnt 
+
+
+
+
+ii) Payment: Fees, Time
+
+
+
+3) Mentor: 
+
+
+
+Add
+
+4) Guardian: i) Progress report ii) Assesments er result
+
+
+
+1) Mentor:- add fee
+2) Student wise teacher opinion
+3) Userwise push and sms send
+4) Assignment Upload class,sub,chap,stu wise
+5) PDF View charge
+
+
+
+Database:- 
+gurusiks_db
+gurusiks_user
+gt(]9Li*9)T#
+
+
+
+Mail:- 
+no-reply
+=Dq}W!jNl{,{
+
+
+//15/11/2018
+
+Name - style, placeholder change
+BoardName - style, placeholder change
+SchoolName - style, placeholder change
+
+Guardian's placeholeder
+
+
+*time
+
+
+
+Mentor Fee When sign up
+
+
+tbl_followers
+i) id, * mentor_id, ii) followers_id, iii) follower_type, iv) follower_status, v) follow_date/time, vi) updated_date/time
+
+
+
+tbl_posts
+I) id, ii) user_id, iii) user_type, iv) data/time, v) post_content, vi)post image, vii) created_date/time, viii) updated_date/time, ix)post_status (0,1) [add,edit,delete]
+
+
+tbl_post_comments
+i)id, ii) post_id, iii) commented_by(user_id), iv) comment_content, v) created_date/time, vi) updated_data/time, vii) comment_status
+
+
+tbl_post_view
+i)id, ii)post_id, iii)viewed_by(user_id), iv)created_date/time, v) updated_data/time
+
+
+tbl_post_save
+id) id, ii) post_id, iii) saved_by(user_id), iv)created_date/time, v) updated_data/time
+
+
+
+
+
+
+
+
+
+
+
+ 

@@ -1,0 +1,7 @@
+[23-Apr-2018 05:04:20] PHP Parse error:  syntax error, unexpected T_CONST in /home3/nibedita/public_html/system/core/CodeIgniter.php on line 58
+[23-Apr-2018 05:04:24] PHP Parse error:  syntax error, unexpected T_CONST in /home3/nibedita/public_html/system/core/CodeIgniter.php on line 58
+[30-Apr-2018 06:38:07] PHP Fatal error:  Call to undefined method CI_Email::type() in /home3/nibedita/public_html/application/controllers/Home.php on line 50
+[30-Apr-2018 06:38:11] PHP Fatal error:  Call to undefined method CI_Email::type() in /home3/nibedita/public_html/application/controllers/Home.php on line 50
+[30-Apr-2018 06:38:54] PHP Fatal error:  Call to undefined method CI_Email::mailtype() in /home3/nibedita/public_html/application/controllers/Home.php on line 50
+[30-Apr-2018 06:40:29] PHP Fatal error:  Call to undefined method CI_Email::mailtype() in /home3/nibedita/public_html/application/controllers/Home.php on line 50
+[12-Jun-2018 00:23:03] PHP Parse error:  syntax error, unexpected $end in /home3/nibedita/public_html/application/controllers/admin/Home.php on line 243
